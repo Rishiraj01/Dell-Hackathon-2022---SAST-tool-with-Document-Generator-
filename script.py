@@ -49,48 +49,29 @@ info = scanner.scan()
 choice = int(input("Enter 1 to create a results file : "))
 if(choice == 1):
     sys.stdout = open('output2.txt','wt')
-    a = list((info['semantic_grep']['matches']['detect-eval-with-expression'].values()))
-    b = list((info['semantic_grep']['matches']['API-call'].values()))
+    rules = []
 
+    data = info["semantic_grep"]['matches']
 
-    eval = []
-    for i in a:
-        if type(i) == list:
-            for y in i:
-                eval.append(y)
-            print("\n")
-            break
-        else:
-            data = pd.DataFrame(i)
-            df = data.loc[:, data.columns != 'file_path']
-            print(df)
-            print("\n")
-    print("\n")
+    for a in info['semantic_grep']['matches']:
+        rules.append(a)
 
-    api = []
-    for i in b:
-        if type(i) == list:
-            for y in i:
-                api.append(y)
-            break
-        else:
-            data = pd.DataFrame(i)
-            df = data.loc[:, data.columns != 'file_path']
-            print(df)
-            print("\n")
+    rules_list = []
+    meta_list = []
 
-    data = pd.DataFrame(eval)
-    df = data.loc[:, data.columns != 'file_path']
-    pdtabulate = lambda df:tabulate(df,headers='keys',tablefmt='grid')
-    print(pdtabulate(df))
-    print("\n")
+    for a in rules:
+        rules_list.append(list(data[a].values())[0])
+    
+    for a in rules:
+        meta_list.append(list(data[a].values())[1])
 
-    data = pd.DataFrame(api)
-    df = data.loc[:, data.columns != 'file_path']
-    pdtabulate = lambda df:tabulate(df,headers='keys',tablefmt='grid')
-    print(pdtabulate(df))
-    print("\n")
-
-
-
-        
+    y = int(0)
+    sys.stdout = open('output2.txt','wt')
+    for i in rules_list:
+        data = pd.DataFrame(i)
+        df = data.loc[:, data.columns != 'file_path']
+        pdtabulate = lambda df:tabulate(df,headers='keys',tablefmt='grid')
+        print(meta_list[y])
+        y = y + 1
+        print(pdtabulate(df))
+        print("\n")

@@ -1,12 +1,5 @@
 rules:
   - id: SQL injection
-    message: Detected SQL statement that can lead to SQL injection. In order to prevent SQL injection, used parameterized queries
-      or prepared statements instead. You can use parameterized statements like con.query('SELECT $1 from table', [userinput])
-    languages:
-      - javascript
-    severity: WARNING
-    metadata:
-      category: security
     patterns:
       - pattern: $QUERY
       - pattern-either:
@@ -14,4 +7,7 @@ rules:
           - pattern-inside: $POOL.execute($QUERY, ...)
       - pattern-not-inside: $POOL.execute('...',[...])
       - pattern-not-inside: $POOL.query('...',[...])
-
+    languages: [js]
+    message: Detected SQL statement that can lead to SQL injection. In order to prevent SQL injection, used parameterized queries
+      or prepared statements instead. You can use parameterized statements like con.query('SELECT $1 from table', [userinput])
+    severity: WARNING
