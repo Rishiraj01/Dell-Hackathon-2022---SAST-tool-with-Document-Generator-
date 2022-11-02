@@ -1,0 +1,19 @@
+rules:
+- id: API-call
+  patterns:
+    - pattern-either:
+      - pattern: |
+          $REQUEST = new XMLHttpRequest();...
+          $REQUEST.open("GET",...)
+      - pattern: fetch(...)
+      - pattern: |
+          $EXPRESS = require("express");...
+          $API = $EXPRESS();
+          $API.listen(...);
+  message: Detected a Call to an API
+  languages: [js, ts]
+  severity: INFO
+  metadata: 
+      category: maintainability
+      source_rule_url: Custom Rule
+      

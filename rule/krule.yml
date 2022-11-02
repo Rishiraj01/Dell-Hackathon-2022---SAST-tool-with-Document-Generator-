@@ -1,0 +1,15 @@
+rules:
+  - id: detect-eval-with-expression
+    patterns:
+      - pattern-either:
+          - pattern: eval(...)
+          - pattern: eval(<... $SINK ...>)
+          - pattern: window.eval(<... $SINK ...>)
+    message: >
+      Detected use of dynamic execution of JavaScript which may come from
+      user-input, which can lead to Cross-Site-Scripting (XSS). Where possible
+      avoid including user-input in functions which dynamically execute
+      user-input.
+    languages:
+      - javascript
+    severity: ERROR
