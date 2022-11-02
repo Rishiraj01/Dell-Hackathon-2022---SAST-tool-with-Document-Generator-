@@ -2,6 +2,8 @@ from libsast import Scanner
 import pprint
 import sys
 import os
+from tabulate import tabulate
+import pandas as pd
 
 file_path = input('Enter a file path: ')
 pprint.pprint('Entered file path to be scanned: '+ file_path)
@@ -42,28 +44,53 @@ options = {
 paths = [file_path]
 scanner = Scanner(options, paths)
 
-
-
 info = scanner.scan()
 
-result = '\n'.join(f'{key}: {value}' for key, value in info.items())
+choice = int(input("Enter 1 to create a results file : "))
+if(choice == 1):
+    sys.stdout = open('output2.txt','wt')
+    a = list((info['semantic_grep']['matches']['detect-eval-with-expression'].values()))
+    b = list((info['semantic_grep']['matches']['API-call'].values()))
 
-#sys.stdout = open('output2.txt','wt')
 
-temp = list(result)
-for i in range(0,len(result)):
-    if temp[i].isnumeric() and temp[i+1] == ",":
-        temp[i+1] = ' -'
+    eval = []
+    for i in a:
+        if type(i) == list:
+            for y in i:
+                eval.append(y)
+            print("\n")
+            break
+        else:
+            data = pd.DataFrame(i)
+            df = data.loc[:, data.columns != 'file_path']
+            print(df)
+            print("\n")
+    print("\n")
 
-result = "".join(temp)
+    api = []
+    for i in b:
+        if type(i) == list:
+            for y in i:
+                api.append(y)
+            break
+        else:
+            data = pd.DataFrame(i)
+            df = data.loc[:, data.columns != 'file_path']
+            print(df)
+            print("\n")
 
-chars_to_remove = ["{", "}", "'"]
-chars_to_indent = [","]
-for char in chars_to_remove:
-    result = result.replace(char, " ")
-for char in chars_to_indent:
-        result = result.replace(char,"\n")
+    data = pd.DataFrame(eval)
+    df = data.loc[:, data.columns != 'file_path']
+    pdtabulate = lambda df:tabulate(df,headers='keys',tablefmt='grid')
+    print(pdtabulate(df))
+    print("\n")
 
-print(result)
+    data = pd.DataFrame(api)
+    df = data.loc[:, data.columns != 'file_path']
+    pdtabulate = lambda df:tabulate(df,headers='keys',tablefmt='grid')
+    print(pdtabulate(df))
+    print("\n")
+
+
 
         
