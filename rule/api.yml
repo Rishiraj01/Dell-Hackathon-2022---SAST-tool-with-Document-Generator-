@@ -11,9 +11,6 @@ rules:
           $API = $EXPRESS();
           $API.listen(...);
   message: Detected a Call to an API
-  languages: [js, ts]
+  languages: [js]
   severity: INFO
-  metadata: 
-      category: maintainability
-      source_rule_url: Custom Rule
       
