@@ -1,8 +1,6 @@
 from libsast import Scanner
 import pprint
 import sys
-import pandas as pd
-import streamlit as st
 
 options = {
     "ignore_filenames": {
@@ -24,7 +22,7 @@ options = {
         "vue.min.js",
         "sast.py",
     },
-    "sgrep_rules": "/mnt/c/Users/bhavi/OneDrive/Documents/Cp lab/Current/rule",
+    "sgrep_rules": "rule",
     "sgrep_extensions": {"", ".yml"},
     "ignore_extensions": {".7z", ".exe", ".rar", ".zip", ".a", ".o", ".tz"},
     "ignore_paths": {
@@ -38,7 +36,7 @@ options = {
     },
     "show_progress": False,
 }
-paths = ["/mnt/c/Users/bhavi/OneDrive/Documents/Cp lab/Current/file/aws.js"]
+paths = ["file"]
 scanner = Scanner(options, paths)
 
 

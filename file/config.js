@@ -52,3 +52,22 @@ window.eval(`alert('${location.href}')`)
 let funcName = new URLSearchParams(window.location.search).get('a')
 // ruleid:detect-eval-with-expression
 var x = new Function(`return ${funcName}(a,b)`)
+
+//MYSQL INjection///
+const mysql = require('mysql2');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+var stm = 'create temporary table ' + table + '_jointemp (temp_seq int, ' + columnName + ' varchar(100)); ';
+con.query(stm) 
+//ruled out
+con.execute(stm,requiredvs) 
+//ruled out
+
+con.query('SELECT * FROM foobar WHERE id = ?', [columnName])
+//not ruled out
