@@ -1,7 +1,10 @@
 from libsast import Scanner
 import pprint
 import sys
+import os
 
+file_path = input('Enter a file path: ')
+pprint.pprint('Entered file path to be scanned: '+ file_path)
 options = {
     "ignore_filenames": {
         "bootstrap.min.js",
@@ -36,7 +39,7 @@ options = {
     },
     "show_progress": False,
 }
-paths = ["file"]
+paths = [file_path]
 scanner = Scanner(options, paths)
 
 
