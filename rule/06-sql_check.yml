@@ -1,0 +1,14 @@
+rules:
+  - id: SQL DB used(INFO)
+    pattern: |
+      $SQL = require("mssql");
+      ...
+      $SQL.connect(...);
+    message: Use of SQL database detected
+    languages:
+      - js
+      - ts
+    severity: INFO
+    metadata:
+      category: maintainability
+      source_rule_url: Custom Rule

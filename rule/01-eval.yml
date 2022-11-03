@@ -1,5 +1,5 @@
 rules:
-  - id: detect-eval-with-expression
+  - id: detect-eval-with-expression(ERROR)
     patterns:
       - pattern-either:
           - pattern: eval(...)

@@ -1,5 +1,5 @@
 rules:
-  - id: SQL injection
+  - id: SQL injection(WARNING)
     patterns:
       - pattern: $QUERY
       - pattern-either:

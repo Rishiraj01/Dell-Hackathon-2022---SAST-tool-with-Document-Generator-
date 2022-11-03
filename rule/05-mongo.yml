@@ -1,0 +1,14 @@
+rules:
+  - id: Mongo DB used(INFO)
+    pattern: |
+      $MONGO = require('mongodb').$MONGO;
+      ...
+      $CLIENT = new $MONGO(...)
+    message: Use of Mongo Database
+    languages:
+      - js
+      - ts
+    severity: INFO
+    metadata:
+      category: maintainability
+      source_rule_url: Custom Rule

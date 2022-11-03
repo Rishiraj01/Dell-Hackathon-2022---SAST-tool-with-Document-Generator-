@@ -45,6 +45,9 @@ eval('alert')
 // ok:detect-eval-with-expression
 window.eval('alert')
 
+var MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority";
+const client = new MongoClient(url);
 
 // ruleid:detect-eval-with-expression
 window.eval(`alert('${location.href}')`)
@@ -71,3 +74,28 @@ con.execute(stm,requiredvs)
 
 con.query('SELECT * FROM foobar WHERE id = ?', [columnName])
 //not ruled out
+
+var sql = require("mssql");
+var config = {
+  user: 'sa',
+  password: 'mypassword',
+  server: 'localhost', 
+  database: 'SchoolDB' 
+};
+
+sql.connect(config, function (err) {
+    
+  if (err) console.log(err);
+
+  // create Request object
+    var request = new sql.Request();
+          
+  // query to the database and get the records
+    request.query('select * from Student', function (err, recordset) {
+            
+    if (err) console.log(err)
+      // send records as a response
+      res.send(recordset);
+            
+    });
+  });
