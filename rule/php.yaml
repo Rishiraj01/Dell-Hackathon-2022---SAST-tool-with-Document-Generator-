@@ -1,0 +1,10 @@
+rules:
+- id: FTP request unsecured
+  message: "FTP allows for unencrypted file transfers. Consider using an encrypted alternative like 'ssh2_scp_send('location')'"
+  languages: [php]
+  severity: WARNING
+  patterns:
+  - pattern: $FUNC(...)
+  - metavariable-regex:
+      metavariable: $FUNC
+      regex: ftp_.+
