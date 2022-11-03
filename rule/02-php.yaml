@@ -1,5 +1,5 @@
 rules:
-- id: FTP request unsecured
+- id: FTP request unsecured in php(WARNING)
   message: "FTP allows for unencrypted file transfers. Consider using an encrypted alternative like 'ssh2_scp_send('location')'"
   languages: [php]
   severity: WARNING

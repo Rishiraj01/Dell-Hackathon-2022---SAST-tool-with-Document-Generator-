@@ -1,5 +1,5 @@
 rules:
-- id: API-call
+- id: API-Call(INFO)
   patterns:
     - pattern-either:
       - pattern: |
@@ -11,6 +11,6 @@ rules:
           $API = $EXPRESS();
           $API.listen(...);
   message: Detected a Call to an API
-  languages: [js]
+  languages: [js, ts]
   severity: INFO
       
