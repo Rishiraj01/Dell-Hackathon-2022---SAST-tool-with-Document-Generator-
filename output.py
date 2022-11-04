@@ -1,8 +1,5 @@
-import tkinter
 import PySimpleGUI as sg
 import os
-import sys
-import time
 
 working_directory = os.getcwd()
 
