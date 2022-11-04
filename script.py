@@ -1,7 +1,6 @@
 from libsast import Scanner
 import sys
 import pandas as pd
-import streamlit as st
 from tabulate import tabulate
 import subprocess
 

@@ -32,11 +32,57 @@ CODE DEPENDENCIES : API-Call(INFO)
 Total Dependencies : 4
 
 
+CODE DEPENDENCIES : Mongo DB used(INFO)
+{'category': 'maintainability', 'source_rule_url': 'Custom Rule', 'description': 'Use of Mongo Database', 'severity': 'INFO'}
++----+------------------+---------------+--------------------------------------------------------------------------------------------------------+
+|    | match_position   | match_lines   | match_string                                                                                           |
++====+==================+===============+========================================================================================================+
+|  0 | (1, 36)          | (48, 50)      | var MongoClient = require('mongodb').MongoClient;                                                      |
+|    |                  |               | const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority"; |
+|    |                  |               | const client = new MongoClient(url);                                                                   |
++----+------------------+---------------+--------------------------------------------------------------------------------------------------------+
+Total Dependencies : 1
+
+
+CODE DEPENDENCIES : SQL DB used(INFO)
+{'category': 'maintainability', 'source_rule_url': 'Custom Rule', 'description': 'Use of SQL database detected', 'severity': 'INFO'}
++----+------------------+---------------+------------------------------------------------------------------------+
+|    | match_position   | match_lines   | match_string                                                           |
++====+==================+===============+========================================================================+
+|  0 | (1, 6)           | (78, 101)     | var sql = require("mssql");                                            |
+|    |                  |               | var config = {                                                         |
+|    |                  |               |   user: 'sa',                                                          |
+|    |                  |               |   password: 'mypassword',                                              |
+|    |                  |               |   server: 'localhost',                                                 |
+|    |                  |               |   database: 'SchoolDB'                                                 |
+|    |                  |               | };                                                                     |
+|    |                  |               |                                                                        |
+|    |                  |               | sql.connect(config, function (err) {                                   |
+|    |                  |               |                                                                        |
+|    |                  |               |   if (err) console.log(err);                                           |
+|    |                  |               |                                                                        |
+|    |                  |               |   // create Request object                                             |
+|    |                  |               |     var request = new sql.Request();                                   |
+|    |                  |               |                                                                        |
+|    |                  |               |   // query to the database and get the records                         |
+|    |                  |               |     request.query('select * from Student', function (err, recordset) { |
+|    |                  |               |                                                                        |
+|    |                  |               |     if (err) console.log(err)                                          |
+|    |                  |               |       // send records as a response                                    |
+|    |                  |               |       res.send(recordset);                                             |
+|    |                  |               |                                                                        |
+|    |                  |               |     });                                                                |
+|    |                  |               |   });                                                                  |
++----+------------------+---------------+------------------------------------------------------------------------+
+Total Dependencies : 1
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 											Rule Violation:
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+You can only use Mongo as a Database
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 												WARNINGS:
@@ -61,14 +107,16 @@ Zend Engine v4.1.2, Copyright (c) Zend Technologies
 
 Vulnerability Detected : SQL injection(WARNING)
 {'description': "Detected SQL statement that can lead to SQL injection. In order to prevent SQL injection, used parameterized queries or prepared statements instead. You can use parameterized statements like con.query('SELECT $1 from table', [userinput])", 'severity': 'WARNING'}
-+----+------------------+---------------+-----------------------------+
-|    | match_position   | match_lines   | match_string                |
-+====+==================+===============+=============================+
-|  0 | (11, 14)         | (67, 67)      | con.query(stm)              |
-+----+------------------+---------------+-----------------------------+
-|  1 | (13, 16)         | (69, 69)      | con.execute(stm,requiredvs) |
-+----+------------------+---------------+-----------------------------+
-Count of possible Vulnerabilities : 2
++----+------------------+---------------+--------------------------------------------------------------------+
+|    | match_position   | match_lines   | match_string                                                       |
++====+==================+===============+====================================================================+
+|  0 | (11, 14)         | (70, 70)      | con.query(stm)                                                     |
++----+------------------+---------------+--------------------------------------------------------------------+
+|  1 | (13, 16)         | (72, 72)      | con.execute(stm,requiredvs)                                        |
++----+------------------+---------------+--------------------------------------------------------------------+
+|  2 | (19, 42)         | (94, 94)      | request.query('select * from Student', function (err, recordset) { |
++----+------------------+---------------+--------------------------------------------------------------------+
+Count of possible Vulnerabilities : 3
 
 
 
@@ -85,7 +133,7 @@ Vulnerability Detected : detect-eval-with-expression(ERROR)
 +----+------------------+---------------+------------------------------------------+
 |  1 | (1, 21)          | (46, 46)      | window.eval('alert')                     |
 +----+------------------+---------------+------------------------------------------+
-|  2 | (1, 41)          | (50, 50)      | window.eval(`alert('${location.href}')`) |
+|  2 | (1, 41)          | (53, 53)      | window.eval(`alert('${location.href}')`) |
 +----+------------------+---------------+------------------------------------------+
 Count of Vulnerabilities : 3
 
