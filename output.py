@@ -19,6 +19,5 @@ while True:
         break
     elif event == "Submit":
         folder_address = values["-FILE_PATH-"]
-        os.system('bash')
-        os.system('ls')
+        os.system('.\output2.txt')
 window.close()
