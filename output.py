@@ -1,7 +1,6 @@
-import tkinter
 import PySimpleGUI as sg
 import os
-import sys
+
 
 working_directory = os.getcwd()
 
